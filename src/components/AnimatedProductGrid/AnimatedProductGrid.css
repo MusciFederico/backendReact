@@ -1,0 +1,25 @@
+/*  src/components/ProductGrid/AnimatedProductGrid.css */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.loading,
+.error {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+}
+
+.error {
+    color: #e53e3e;
+}
+
+.title {
+    text-align: center;
+    margin: 2rem 0;
+    font-size: 2rem;
+    color: #2d3748;
+}
