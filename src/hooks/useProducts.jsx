@@ -10,6 +10,7 @@ export const useProducts = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
+                // Fetch products with credentials for authentication
                 const response = await axios("http://localhost:8080/api/products", {
                     withCredentials: true
                 });

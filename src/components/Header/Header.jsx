@@ -1,9 +1,15 @@
 // src/components/Header/Header.jsx
+/**
+ * Header component containing navigation and authentication controls.
+ * Features animated entrance effect using Framer Motion.
+ * @component
+ */
 import React from 'react';
 import { motion } from 'framer-motion';
 import './Header.css';
 
 const Header = () => {
+    // Define animation variants for header
     const headerVariants = {
         hidden: { opacity: 0, y: -20 },
         visible: {

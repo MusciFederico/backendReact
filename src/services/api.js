@@ -1,4 +1,8 @@
 // src/services/api.js
+/**
+ * API service module for handling all API calls.
+ * Centralizes API endpoint configuration and axios instance setup.
+ */
 import axios from 'axios';
 
 const API_URL = 'http://localhost:8080/api';

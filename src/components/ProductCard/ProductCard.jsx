@@ -1,122 +1,39 @@
-// // import React, { useCallback } from 'react';
-// // import { debounce } from '../../utils/debouncer';
-
-// // const ProductCard = React.memo(({ product }) => {
-// //     const handleMouseMove = useCallback((e, card) => {
-// //         const { left, top, width, height } = card.getBoundingClientRect();
-// //         const centerX = left + width / 2;
-// //         const centerY = top + height / 2;
-// //         const mouseX = e.clientX - centerX;
-// //         const mouseY = e.clientY - centerY;
-// //         // Reversed the signs here to change the tilt direction
-// //         const rotateX = (mouseY / height) * -10; // Max rotation of 10 degrees
-// //         const rotateY = (mouseX / width) * 10; // Max rotation of 10 degrees
-
-// //         card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-// //     }, []);
-
-// //     // Debounced version of handleMouseMove
-// //     const debouncedHandleMouseMove = useCallback(
-// //         debounce((e, card) => handleMouseMove(e, card), 10),
-// //         [handleMouseMove]
-// //     );
-
-// //     const handleMouseLeave = useCallback((card) => {
-// //         card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-// //     }, []);
-
-// //     return (
-// //         <div
-// //             className="product-card"
-// //             onMouseMove={(e) => debouncedHandleMouseMove(e, e.currentTarget)}
-// //             onMouseLeave={(e) => handleMouseLeave(e.currentTarget)}
-// //         >
-// //             <div className="product-card-inner">
-// //                 <img src={product.photo} alt={product.name} className="product-image" />
-// //                 <div className="product-info">
-// //                     <h3 className="product-name">{product.name}</h3>
-// //                     <p className="product-price">${product.price.toFixed(2)}</p>
-// //                     <p className="product-stock">Available: {product.stock}</p>
-// //                     <button className="button button-primary">Add to Cart</button>
-// //                 </div>
-// //             </div>
-// //         </div>
-// //     );
-// // });
-
-// // export default ProductCard;
-
-// // src/components/ProductCard/ProductCard.jsx
-// import React, { useCallback } from 'react';
-// import { debounce } from '../../utils/debouncer';
-// import './ProductCard.css';
-
-// const ProductCard = React.memo(({ product }) => {
-//     const handleMouseMove = useCallback((e, card) => {
-//         const { left, top, width, height } = card.getBoundingClientRect();
-//         const centerX = left + width / 2;
-//         const centerY = top + height / 2;
-//         const mouseX = e.clientX - centerX;
-//         const mouseY = e.clientY - centerY;
-//         const rotateX = (mouseY / height) * -10;
-//         const rotateY = (mouseX / width) * 10;
-
-//         card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-//     }, []);
-
-//     const debouncedHandleMouseMove = useCallback(
-//         debounce((e, card) => handleMouseMove(e, card), 10),
-//         [handleMouseMove]
-//     );
-
-//     const handleMouseLeave = useCallback((card) => {
-//         card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-//     }, []);
-
-//     return (
-//         <div
-//             className="product-card"
-//             onMouseMove={(e) => debouncedHandleMouseMove(e, e.currentTarget)}
-//             onMouseLeave={(e) => handleMouseLeave(e.currentTarget)}
-//         >
-//             <div className="product-card-inner">
-//                 <img src={product.photo} alt={product.name} className="product-image" />
-//                 <div className="product-info">
-//                     <h3 className="product-name">{product.name}</h3>
-//                     <p className="product-price">${product.price.toFixed(2)}</p>
-//                     <p className="product-stock">Available: {product.stock}</p>
-//                     <button className="button button-primary">Add to Cart</button>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// });
-
-// export default ProductCard;
 // src/components/ProductCard/ProductCard.jsx
+/**
+ * Product card component that displays individual product information with interactive 3D hover effects.
+ * Uses React.memo for performance optimization and implements smooth mouse tracking animations.
+ * @component
+ * @param {Object} props
+ * @param {Object} props.product - Product data object containing name, price, stock, and photo
+ */
 import React, { useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { debounce } from '../../utils/debouncer';
 import './ProductCard.css';
 
 const ProductCard = React.memo(({ product }) => {
+    // Calculate 3D rotation effect based on mouse position
     const handleMouseMove = useCallback((e, card) => {
         const rect = card.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
         const mouseX = e.clientX - centerX;
         const mouseY = e.clientY - centerY;
+        // Calculate rotation angles based on mouse position relative to card center
         const rotateX = (mouseY / rect.height) * -10;
         const rotateY = (mouseX / rect.width) * 10;
 
+        // Apply 3D transform with perspective
         card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
     }, []);
 
+    // Debounce mouse move handler to improve performance
     const debouncedHandleMouseMove = useCallback(
         debounce((e, card) => handleMouseMove(e, card), 10),
         [handleMouseMove]
     );
 
+    // Reset card transform on mouse leave
     const handleMouseLeave = useCallback((card) => {
         card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
     }, []);

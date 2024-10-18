@@ -1,0 +1,68 @@
+.filter-section {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 30px;
+}
+
+.input {
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 15px;
+    border: 1px solid #e2e8f0;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #6b46c1;
+    box-shadow: 0 0 0 2px rgba(107, 70, 193, 0.2);
+}
+
+.input::placeholder {
+    color: #a0aec0;
+}
+
+@media (max-width: 768px) {
+    .filter-section {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .input {
+        padding: 10px 14px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .filter-section {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .input {
+        padding: 8px 12px;
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+}
+
+@media (max-width: 360px) {
+    .filter-section {
+        padding: 12px;
+        margin-bottom: 12px;
+    }
+
+    .input {
+        padding: 8px;
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+}

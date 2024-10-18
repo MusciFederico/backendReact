@@ -1,9 +1,15 @@
 // src/components/FilterSection/FilterSection.jsx
+/**
+ * Filter section component that provides search and sorting functionality.
+ * Implements animated appearance using Framer Motion.
+ * @component
+ */
 import React from 'react';
 import { motion } from 'framer-motion';
 import './FilterSection.css';
 
 const FilterSection = () => {
+    // Define animation variants for filter section
     const filterVariants = {
         hidden: { opacity: 0, y: -20 },
         visible: {
