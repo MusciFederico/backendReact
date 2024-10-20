@@ -1,7 +1,11 @@
-// src/hooks/useProducts.js
+// // src/hooks/useProducts.js
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { api } from '../services/api';
 
+/**
+ * Custom hook for managing product data fetching and state
+ * @returns {Object} Product data state and loading/error states
+ */
 export const useProducts = () => {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -10,14 +14,11 @@ export const useProducts = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                // Fetch products with credentials for authentication
-                const response = await axios("http://localhost:8080/api/products", {
-                    withCredentials: true
-                });
+                const response = await api.getProducts();
                 setProducts(response.data.response);
                 setError(null);
             } catch (err) {
-                console.log("err", err);
+                console.error("Failed to fetch products:", err);
                 setError(err.response?.data?.message || 'Failed to fetch products');
                 setProducts([]);
             } finally {
@@ -28,5 +29,25 @@ export const useProducts = () => {
         fetchProducts();
     }, []);
 
-    return { products, isLoading, error };
+    // Add methods to manipulate products if needed
+    const refreshProducts = async () => {
+        setIsLoading(true);
+        try {
+            const response = await api.getProducts();
+            setProducts(response.data.response);
+            setError(null);
+        } catch (err) {
+            setError(err.response?.data?.message || 'Failed to refresh products');
+            setProducts([]);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    return {
+        products,
+        isLoading,
+        error,
+        refreshProducts // Expose method to manually refresh products
+    };
 };
